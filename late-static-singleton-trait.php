@@ -6,7 +6,7 @@
  *
  * @author      Christopher Davis <http://christopherdavis.me>
  */
-trait Singleton
+trait Singleton3
 {
     /**
      * Container for the objects.
@@ -31,7 +31,7 @@ trait Singleton
 }
 class A
 {
-    use Singleton;
+    use Singleton3;
 
     protected function __construct()
     {
@@ -40,7 +40,7 @@ class A
 }
 class B
 {
-    use Singleton;
+    use Singleton3;
 
     protected function __construct()
     {

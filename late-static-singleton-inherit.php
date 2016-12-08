@@ -6,7 +6,7 @@
  *
  * @author      Christopher Davis <http://christopherdavis.me>
  */
-abstract class Singleton
+abstract class Singleton4
 {
     /**
      * Container for the objects.
@@ -29,14 +29,14 @@ abstract class Singleton
     }
     abstract protected function __construct();
 }
-class A extends Singleton
+class A extends Singleton4
 {
     protected function __construct()
     {
         echo "In ", get_called_class(), "\n";
     }
 }
-class B extends Singleton
+class B extends Singleton4
 {
     protected function __construct()
     {
