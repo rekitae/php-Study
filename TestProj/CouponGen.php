@@ -56,6 +56,7 @@ function decode($str)
 
 $input = 'sw1626';
 $encode = encode($input);
+
 echo $encode , PHP_EOL;
 echo '-------------------', PHP_EOL;
 $decode = decode($encode);

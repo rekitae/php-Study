@@ -6,7 +6,7 @@
  *
  * @author      Christopher Davis <http://christopherdavis.me>
  */
-abstract class Singleton4
+trait Singleton3
 {
     /**
      * Container for the objects.
@@ -27,20 +27,24 @@ abstract class Singleton4
         !isset(self::$registry[$cls]) && self::$registry[$cls] = new $cls;
         return self::$registry[$cls];
     }
-    abstract protected function __construct();
+
 }
-class A extends Singleton4
+class A
 {
+    use Singleton3;
+
     protected function __construct()
     {
-        echo "In ", get_called_class(), "\n";
+        echo "In 1 ", get_called_class(), "\n";
     }
 }
-class B extends Singleton4
+class B
 {
+    use Singleton3;
+
     protected function __construct()
     {
-        echo "In B\n";
+        echo "In 2 B\n";
     }
 }
 class C extends A

@@ -2,12 +2,27 @@
 trait Singleton
 {
     protected static $instance;
+    protected static $static_count = 0;
+    protected $count = 0;
 
-    final public static function getInstance()
+    final public static function getInstance($option = null)
     {
         return isset(static::$instance)
             ? static::$instance
-            : static::$instance = new static();
+            : static::$instance = new static($option);
+    }
+
+    // 단일 책임 원칙 위반
+/*
+    final public static function create($option = null)
+    {
+        return new static($option);
+    }
+*/
+
+    final public function status()
+    {
+        echo '[', self::$static_count, ']', ' - [', $this->count, ']';
     }
 }
 
@@ -21,6 +36,11 @@ trait Util
 // 영속계층으로써 제공해야되는 기능
 interface IPersist2
 {
+    protected function __construct($shardKey = 0)
+    {
+        // 샤드키로 접속 종단 구분?
+    }
+
 	function load();
 
 	function persist();
@@ -31,7 +51,7 @@ interface IPersist2
 // 레디스 영속 계층 구현
 class RedisPersist2 implements IPersist2
 {
-	function __construct($shardKey)
+	protected function __construct($shardKey = 0)
 	{
 		// 샤드키로 접속 종단 구분?
 	}
@@ -62,7 +82,12 @@ class RedisPersist2 implements IPersist2
 // 맴캐시 영속 계층 구현
 class MemcachePersist2 implements IPersist2
 {
-	function connect() {
+    protected function __construct()
+    {
+        // 샤드키로 접속 종단 구분?
+    }
+
+    function connect() {
 		echo __CLASS__, ':', __function__, PHP_EOL;
 	}
 
@@ -84,6 +109,22 @@ class MemcachePersist2 implements IPersist2
 		return __function__;
 	}
 }
+/*
+class PersistFactory
+{
+    function create()
+    {
+        return new RedisPersist2;
+    }
+
+    function getInstance()
+    {
+
+    }
+
+    // 싱글톤?
+}
+*/
 
 // 모델로써 제공해야되는 기능
 interface IModel
@@ -94,8 +135,9 @@ interface IModel
 	// 삭제
 	// 조회
 
-	function find();
-	function findList();
+    //function findAll();
+    function findList();
+    function find();
 
 /*
 	function find() {
@@ -116,7 +158,7 @@ abstract class RedisModel implements IModel
 	//abstract function __construct(IPersist2 $persist);
 	//abstract static function create(IPersist2 $persist);
 
-	function __construct(RedisPersist2 $persist)
+	protected function __construct(RedisPersist2 $persist)
 	{
 		$this->persist = $persist;
 	}

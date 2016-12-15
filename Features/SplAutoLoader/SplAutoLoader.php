@@ -5,17 +5,17 @@
             spl_autoload_register(array($this, 'loader'));
         }
         private function loader($className) {
-            echo 'Trying to load ', $className, ' via ', __METHOD__, "()\n";
+            echo 'Trying to load ', $className, ' via ', __METHOD__, "()", PHP_EOL;
             include $className . '.php';
         }
     }
 
-    $autoloader = new ClassAutoloader();
+    new ClassAutoloader();
 
     $obj = new TestClass1();
     $obj = new TestClass2();
 
-    $a = TestClass3::test();
+    TestClass3::test();
 ?>
 
 
