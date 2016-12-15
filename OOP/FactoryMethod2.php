@@ -15,6 +15,7 @@ class A {
     }
 
 	public function test() {
+
 		echo 'test' , PHP_EOL;
 	}
 }
