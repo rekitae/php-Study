@@ -12,7 +12,8 @@
   "require": {
     "phpunit/phpunit": "5.7.4",
     "psr/log": "1.0.2",
-    "fzaninotto/faker": "v1.6.0"
+    "fzaninotto/faker": "v1.6.0",
+    "reactivex/rxphp": "1.5.1"
   },
   "autoload": {
     "psr-4": {
