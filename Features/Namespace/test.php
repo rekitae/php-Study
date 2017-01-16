@@ -46,6 +46,10 @@ $str = "i'm a boy";
 $temp = array_map('trim', explode(' ', $str));
 print_r($temp);
 
+print_r(Common\trim2('qwer'));
+$temp = array_map('Common\trim2', explode(' ', $str));
+print_r($temp);
+
 exit;
 
 //$res->b2 = Common\reduce('sum', $list, 0);

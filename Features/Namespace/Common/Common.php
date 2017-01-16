@@ -92,3 +92,8 @@ function map($callable, $list)
 {
     return array_map($callable, $list);
 }
+
+function trim2($a)
+{
+    return trim($a);
+}
